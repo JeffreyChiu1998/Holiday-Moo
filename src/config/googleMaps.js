@@ -3,7 +3,7 @@
 // Get your API key from: https://console.cloud.google.com/google/maps-apis/
 
 export const GOOGLE_MAPS_CONFIG = {
-  apiKey: "AIzaSyCObsrIJOhfcYa3WKJ4YH_IOoKZPmLEvcQ", // Replace with your actual API key
+  apiKey: "", // Replace with your actual API key
   libraries: ["places"], // Required libraries for Places API
   language: "en", // Language for the API
   region: "US", // Region for the API
