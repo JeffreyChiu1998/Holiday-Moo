@@ -2,6 +2,7 @@
   "name": "holiday-moo",
   "version": "1.0.0",
   "private": true,
+  "description": "Holiday Moo - A comprehensive travel planning application with calendar, maps, and AI chatbot features",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
