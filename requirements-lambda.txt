@@ -1,2 +1,0 @@
-# AWS Lambda requirements for Holiday Moo Excel Export Service
-openpyxl==3.1.2
