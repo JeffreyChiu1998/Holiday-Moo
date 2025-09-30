@@ -1,0 +1,1072 @@
+/* Tool Panel Container for positioning */
+.tool-panel-container {
+  position: relative;
+  overflow: visible;
+}
+
+/* Prevent scrolling when chatbot opens */
+.tool-panel-container:has(.moo-chatbot-window:not(.minimized)) {
+  overflow: visible;
+}
+
+/* Moo Chatbot Styles */
+.moo-chatbot-window {
+  position: absolute;
+  bottom: 70px; /* Position slightly higher from bottom */
+  width: 400px;
+  height: 600px;
+  background: white;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  z-index: 1500;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  justify-content: space-between;
+}
+
+.moo-chatbot-window.minimized {
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Responsive positioning for smaller screens */
+@media (max-width: 768px) {
+  .moo-chatbot-window {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: auto;
+    max-width: calc(100vw - 20px);
+    height: 500px;
+    max-height: calc(100vh - 20px);
+  }
+}
+
+@media (max-height: 700px) {
+  .moo-chatbot-window {
+    height: 400px;
+    max-height: calc(100vh - 20px);
+  }
+}
+
+/* Header */
+.moo-chatbot-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.moo-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.moo-avatar-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.moo-avatar-header {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.moo-avatar-header:hover {
+  transform: scale(1.05);
+}
+
+.moo-avatar-fallback {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.moo-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.moo-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.moo-status {
+  font-size: 11px;
+  opacity: 0.85;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.moo-header-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.moo-minimize-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-weight: bold;
+}
+
+.moo-minimize-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.moo-minimize-button span {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.moo-close-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.moo-close-button:hover {
+  background: rgba(239, 68, 68, 0.8);
+  border-color: rgba(239, 68, 68, 1);
+  transform: translateY(-1px);
+}
+
+.moo-close-button span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Messages */
+.moo-messages-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Start from top, let content flow down */
+  gap: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 #f7fafc;
+}
+
+/* Custom scrollbar for webkit browsers */
+.moo-messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.moo-messages-container::-webkit-scrollbar-track {
+  background: #f7fafc;
+  border-radius: 3px;
+}
+
+.moo-messages-container::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+.moo-messages-container::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+.moo-message {
+  display: flex;
+  gap: 10px;
+  max-width: 85%;
+  align-items: flex-start;
+}
+
+.moo-message.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.moo-message.moo {
+  align-self: flex-start;
+}
+
+.moo-avatar-message {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.moo-avatar-fallback-message {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.moo-message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.moo-message-text {
+  background: #f3f4f6;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.moo-message.user .moo-message-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.moo-message-time {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+.moo-message.user .moo-message-time {
+  text-align: right;
+}
+
+/* Typing Indicator */
+.moo-typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 12px 16px;
+  background: #f3f4f6;
+  border-radius: 18px;
+  align-items: center;
+}
+
+.moo-typing-indicator span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #9ca3af;
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+.moo-typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.moo-typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes typing {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Options */
+.moo-options-container {
+  padding: 0 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0; /* Prevent options area from shrinking */
+}
+
+.moo-option-button {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.moo-option-button:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+  color: #1f2937;
+}
+
+.moo-options-note {
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Input */
+.moo-input-container {
+  padding: 16px 20px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+  flex-shrink: 0; /* Prevent input area from shrinking */
+}
+
+.moo-input-container form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.moo-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 20px;
+  font-size: 14px;
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.moo-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.moo-input:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+}
+
+.moo-send-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 60px;
+}
+
+.moo-send-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  transform: translateY(-1px);
+}
+
+.moo-send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .moo-chatbot-window {
+    width: 350px;
+    height: 500px;
+    max-height: 500px;
+  }
+
+  .moo-messages-container {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .moo-message-text {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .moo-input-container {
+    padding: 12px 16px;
+  }
+
+  .moo-input {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .moo-send-button {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .moo-avatar-message,
+  .moo-avatar-fallback-message {
+    width: 28px;
+    height: 28px;
+  }
+
+  .moo-avatar-fallback-message {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .moo-chatbot-window {
+    width: 320px;
+    height: 450px;
+    max-height: 450px;
+  }
+
+  .moo-header-text {
+    gap: 1px;
+  }
+
+  .moo-title {
+    font-size: 14px;
+  }
+
+  .moo-status {
+    font-size: 10px;
+  }
+
+  .moo-avatar-header,
+  .moo-avatar-fallback {
+    width: 32px;
+    height: 32px;
+  }
+
+  .moo-avatar-fallback {
+    font-size: 16px;
+  }
+
+  .moo-minimize-button,
+  .moo-close-button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .moo-minimize-button span {
+    font-size: 14px;
+  }
+
+  .moo-close-button span {
+    font-size: 16px;
+  }
+
+  .moo-chatbot-icon .moo-icon-fallback {
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .moo-chatbot-section {
+    padding: 2px 6px 2px 3px;
+    min-width: 42px;
+    margin-right: 2px;
+  }
+}
+
+/* Close Confirmation Dialog */
+.moo-confirmation-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  border-radius: 16px;
+}
+
+.moo-confirmation-dialog {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 320px;
+  width: 90%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.moo-confirmation-header {
+  margin-bottom: 16px;
+}
+
+.moo-confirmation-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.moo-confirmation-content {
+  margin-bottom: 24px;
+}
+
+.moo-confirmation-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.moo-confirmation-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.moo-cancel-button {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.moo-cancel-button:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.moo-confirm-button {
+  background: #ef4444;
+  border: 1px solid #ef4444;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.moo-confirm-button:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+/* Message Links */
+.moo-message-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.moo-message-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.moo-message-link:visited {
+  color: #7c3aed;
+}
+
+/* Chatbot and Bucket List Section Layout */
+.moo-chatbot-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: row;
+  flex-shrink: 0;
+  margin-right: 12px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Chatbot Icon Styles - Larger size */
+.moo-chatbot-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: transform 0.2s ease;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -10px 0; /* Negative margin to extend outside panel bounds */
+}
+
+.moo-chatbot-icon:hover {
+  transform: scale(1.1);
+}
+
+.moo-chatbot-icon.bouncing {
+  animation: bounce 0.6s infinite alternate;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+.moo-chatbot-icon img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.3s ease;
+}
+
+.moo-chatbot-icon:hover img {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.moo-chatbot-icon .moo-icon-fallback {
+  font-size: 22px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 3px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Unread Message Indicator */
+.unread-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
+}
+
+/* Bucket List Icon Styles - Larger size matching chatbot */
+.bucket-list-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: transform 0.2s ease;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -10px 0; /* Negative margin to extend outside panel bounds */
+}
+
+.bucket-list-icon:hover {
+  transform: scale(1.1);
+}
+
+.bucket-list-icon img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.3s ease;
+}
+
+.bucket-list-icon:hover img {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.bucket-list-icon .bucket-icon-fallback {
+  font-size: 22px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 3px 12px rgba(240, 147, 251, 0.4);
+}
+
+/* Bucket List Count Badge */
+.bucket-unread-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #f5576c;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .moo-chatbot-section {
+    gap: 8px;
+  }
+
+  .moo-chatbot-icon,
+  .bucket-list-icon {
+    width: 50px;
+    height: 50px;
+    margin: -8px 0;
+  }
+
+  .moo-chatbot-icon img,
+  .bucket-list-icon img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .moo-chatbot-icon .moo-icon-fallback,
+  .bucket-list-icon .bucket-icon-fallback {
+    width: 38px;
+    height: 38px;
+    font-size: 19px;
+  }
+
+  .unread-badge,
+  .bucket-unread-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    top: 1px;
+    right: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .moo-chatbot-section {
+    gap: 6px;
+  }
+
+  .moo-chatbot-icon,
+  .bucket-list-icon {
+    width: 46px;
+    height: 46px;
+    margin: -6px 0;
+  }
+
+  .moo-chatbot-icon img,
+  .bucket-list-icon img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .moo-chatbot-icon .moo-icon-fallback,
+  .bucket-list-icon .bucket-icon-fallback {
+    width: 34px;
+    height: 34px;
+    font-size: 17px;
+  }
+
+  .unread-badge,
+  .bucket-unread-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    top: 0px;
+    right: 0px;
+  }
+}
+/* Icon with Label Container */
+.icon-with-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.icon-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-top: 4px;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure labels don't interfere with tool panel height */
+.moo-chatbot-section {
+  position: relative;
+  overflow: visible;
+}
+
+/* Responsive adjustments for labels */
+@media (max-width: 768px) {
+  .icon-label {
+    font-size: 9px;
+    padding: 1px 4px;
+    margin-top: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .icon-label {
+    font-size: 8px;
+    padding: 1px 3px;
+    margin-top: 2px;
+  }
+}
+/* Checklist Icon Styles - Matching Chatbot and Bucket List */
+.checklist-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: transform 0.2s ease;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -10px 0; /* Negative margin to extend outside panel bounds */
+}
+
+.checklist-icon:hover {
+  transform: scale(1.1);
+}
+
+.checklist-icon img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.3s ease;
+}
+
+.checklist-icon:hover img {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.checklist-icon .checklist-icon-fallback {
+  font-size: 22px;
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 3px 12px rgba(6, 182, 212, 0.4);
+}
+
+/* Checklist Progress Badge */
+.checklist-progress-badge {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #06b6d4;
+  color: white;
+  border-radius: 10px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid white;
+  z-index: 1000; /* Higher than icon labels */
+}
+
+/* Responsive adjustments for checklist icon */
+@media (max-width: 768px) {
+  .checklist-icon {
+    width: 50px;
+    height: 50px;
+    margin: -8px 0;
+  }
+
+  .checklist-icon img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .checklist-icon .checklist-icon-fallback {
+    width: 38px;
+    height: 38px;
+    font-size: 19px;
+  }
+
+  .checklist-progress-badge {
+    font-size: 9px;
+    padding: 1px 4px;
+    top: -1px;
+    z-index: 1000;
+  }
+}
+
+@media (max-width: 480px) {
+  .checklist-icon {
+    width: 46px;
+    height: 46px;
+    margin: -6px 0;
+  }
+
+  .checklist-icon img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .checklist-icon .checklist-icon-fallback {
+    width: 34px;
+    height: 34px;
+    font-size: 17px;
+  }
+
+  .checklist-progress-badge {
+    font-size: 8px;
+    padding: 1px 3px;
+    top: 0px;
+    z-index: 1000;
+  }
+}
+
+/* Trip Planner Icon Styles - Matching other icons */
+.trip-planner-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: transform 0.2s ease;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -10px 0;
+}
+
+.trip-planner-icon:hover {
+  transform: scale(1.1);
+}
+
+.trip-planner-icon img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.trip-planner-icon:hover img {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.trip-planner-icon .trip-planner-icon-fallback {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 22px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  transition: all 0.3s ease;
+}
+
+.trip-planner-icon:hover .trip-planner-icon-fallback {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Trip Planner Section - Right side positioning */
+.trip-planner-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive adjustments for trip planner icon - follows right side pattern */
